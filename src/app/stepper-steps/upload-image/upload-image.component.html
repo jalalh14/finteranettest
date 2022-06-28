@@ -1,0 +1,45 @@
+<p-card>
+    <ng-template pTemplate="title" *ngIf="!viewMode">
+        Upload Image
+    </ng-template>
+
+    <ng-template pTemplate="title" *ngIf="viewMode">
+        Uploaded Image
+    </ng-template>
+
+    <ng-template pTemplate="subtitle" *ngIf="!viewMode">
+        Upload your Image here.
+    </ng-template>
+
+    <ng-template pTemplate="content">
+        <ng-container *ngIf="!viewMode && !image">
+            <p-fileUpload name="myfile[]" [multiple]="false" accept="image/*" [maxFileSize]="1000000"
+                [customUpload]="true" [showCancelButton]="false" (uploadHandler)="uploadImage($event)"
+                [disabled]="image" [showUploadButton]="!image" (onRemove)="removeImage()">
+            </p-fileUpload>
+        </ng-container>
+        <ng-container *ngIf="viewMode || image">
+            <div class="uploaded-file">
+                <div><img [src]="filePath" class="uploaded-img"></div>
+                <div>{{image?.name}}</div>
+                <div>{{image?.size/1000}} - KB</div>
+                <div *ngIf="!viewMode">
+                    <p-button label="" icon="pi pi-times" (onClick)="removeImage()"></p-button>
+                </div>
+            </div>
+        </ng-container>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <div class="grid grid-nogutter btns-container" *ngIf="!viewMode">
+
+            <p-button label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right"
+                [disabled]="!this.image" [style]="{float:'right'}"></p-button>
+        </div>
+    </ng-template>
+</p-card>
+
+
+
+<p-toast position="bottom-right">
+</p-toast>

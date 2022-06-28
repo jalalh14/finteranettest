@@ -1,0 +1,25 @@
+.person-tr {
+  &:hover {
+    background-color: #efefef;
+  }
+  cursor: pointer;
+}
+
+.buttons-container {
+  margin-top: 50px;
+}
+
+.selected-person {
+  background-color: darkgreen !important;
+  color: #fff !important;
+}
+
+:not(.view-mode).selected-person {
+  background-color: darkgreen !important;
+  color: #fff !important;
+}
+
+.view-mode.selected-person {
+  background-color: #003e64ab !important;
+  color: #fff !important;
+}

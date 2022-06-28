@@ -1,0 +1,61 @@
+.form-group {
+  margin-top: 15px;
+
+  label {
+    color: #445a74;
+  }
+
+  .form-control {
+    width: 100%;
+    margin-top: 10px;
+    box-sizing: border-box;
+
+    // &:focus {
+    //   color: #495057;
+    //   background-color: #fff;
+    //   border-color: #80bdff;
+    //   outline: 0;
+    //   box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+    // }
+
+    &::placeholder {
+      color: rgba(68, 90, 116, 0.6);
+      opacity: 1; /* Firefox */
+    }
+
+    &:-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: rgba(68, 90, 116, 0.6);
+    }
+
+    &::-ms-input-placeholder {
+      /* Microsoft Edge */
+      color: rgba(68, 90, 116, 0.6);
+    }
+  }
+}
+
+.form-group.required {
+  .form-label-inline:after {
+    content: "*";
+    color: red;
+  }
+}
+
+.validation-error {
+  color: red;
+  font-size: 11px;
+  margin-top: 5px;
+}
+
+::ng-deep .form-control {
+  width: 100%;
+}
+
+::ng-deep form.ng-submitted {
+  input.ng-invalid,
+  p-dropdown.ng-invalid .form-control,
+  p-calendar.ng-invalid .form-control input {
+    border: 1px solid red !important;
+  }
+}

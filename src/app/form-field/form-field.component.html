@@ -1,0 +1,99 @@
+<ng-container [ngSwitch]="type">
+  <!--------------------- text or textarea ---------------------->
+  <ng-container *ngSwitchCase="type === 'text' || type === 'textarea' || type === 'password' ? type : ''">
+    <div [formGroup]="myFormGroup" [class.has-error]="
+        myFormGroup.get(myFormControlName)?.invalid && formSubmitted
+      " class="form-group" [class.required]="isRequired">
+      <label class="form-label-inline" [attr.for]="htmlElementId">
+        {{ title }}
+      </label>
+      <div>
+        <input class="form-control" pInputText [formControlName]="myFormControlName" [id]="htmlElementId" [type]="type"
+          [attr.disabled]="isDisabled || null" *ngIf="type === 'text'||type === 'password'"
+          [attr.placeholder]="placeholder" />
+
+        <textarea class="form-control" [formControlName]="myFormControlName" [id]="htmlElementId"
+          [attr.disabled]="isDisabled || null" *ngIf="type === 'textarea'" [attr.placeholder]="placeholder"></textarea>
+
+        <div class="validation-error" *ngIf="
+            myFormGroup.get(myFormControlName)?.hasError('required') && formSubmitted">
+          - {{title}} is required!
+        </div>
+        <div class="validation-error" *ngIf="
+        myFormGroup.get(myFormControlName)?.hasError('pattern') && formSubmitted">
+          <ng-container *ngIf="customPatternErrorMessage">
+            {{customPatternErrorMessage}}
+          </ng-container>
+          <ng-container *ngIf="!customPatternErrorMessage">
+            Use valid characters!
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <!-------------- date ---------------->
+  <ng-container *ngSwitchCase="'date'">
+
+    <div [formGroup]="myFormGroup" [class.has-error]="
+        myFormGroup.get(myFormControlName)?.invalid && formSubmitted
+      " class="form-group select" [class.required]="isRequired">
+      <label class="form-label-inline" [attr.for]="htmlElementId">{{ title }} </label>
+      <div style="padding-top: 10px;">
+
+        <p-calendar [formControlName]="myFormControlName" styleClass="form-control" [placeholder]="placeholder"
+          [showIcon]="true" [minDate]="minDate!" [maxDate]="maxDate!" [disabled]="isDisabled"></p-calendar>
+        <!-- <p-dropdown [options]="items" [formControlName]="myFormControlName" [optionLabel]="optionLabel"
+          [autoDisplayFirst]="false" [optionValue]="optionValue" styleClass="form-control" placeholder="Select ..."
+          [filter]="showSelectFilter">
+        </p-dropdown> -->
+
+        <div *ngIf="
+            myFormGroup.get(myFormControlName)?.hasError('required') &&
+            formSubmitted
+          " class="validation-error">
+          <small class="text-danger">{{title}} is required</small>
+        </div>
+        <div *ngIf="
+        myFormGroup.get(myFormControlName)?.hasError('pattern') &&
+        formSubmitted
+      " class="validation-error">
+          <small class="text-danger">{{title}} is not valid</small>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+
+
+  <!-------------- select ---------------->
+  <ng-container *ngSwitchCase="'select'">
+
+
+    <div [formGroup]="myFormGroup" [class.has-error]="
+        myFormGroup.get(myFormControlName)?.invalid && formSubmitted
+      " class="form-group select" [class.required]="isRequired">
+      <label class="form-label-inline" [attr.for]="htmlElementId">{{ title }} </label>
+      <div style="padding-top: 10px;">
+
+        <p-dropdown [options]="items" [formControlName]="myFormControlName" [optionLabel]="optionLabel"
+          [autoDisplayFirst]="false" [optionValue]="optionValue" styleClass="form-control" placeholder="Select ..."
+          [filter]="showSelectFilter">
+        </p-dropdown>
+
+        <div *ngIf="
+            myFormGroup.get(myFormControlName)?.hasError('required') &&
+            formSubmitted
+          " class="validation-error">
+          <small class="text-danger">{{title}} is required</small>
+        </div>
+        <div *ngIf="
+        myFormGroup.get(myFormControlName)?.hasError('pattern') &&
+        formSubmitted
+      " class="validation-error">
+          <small class="text-danger">{{title}} is not valid</small>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>

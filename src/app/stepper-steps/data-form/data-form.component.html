@@ -1,0 +1,73 @@
+<p-card>
+    <ng-template pTemplate="title">
+        Form <span *ngIf="viewMode">Data</span>
+    </ng-template>
+
+    <ng-template pTemplate="subtitle" *ngIf="!viewMode">
+        Fill the form.
+    </ng-template>
+
+    <ng-template pTemplate=" content">
+        <form [formGroup]="form" (ngSubmit)="nextPage() " *ngIf="!viewMode">
+
+            <my-form-field [type]="'text'" [title]="'Valid amount'" [myFormGroup]="form" [isRequired]="true"
+                [myFormControlName]="'amount'" [htmlElementId]="'amount'" [formSubmitted]="formSubmitted"
+                [customPatternErrorMessage]="'Use numbers only!'">
+            </my-form-field>
+
+            <my-form-field [type]="'date'" [title]="'Valid date'" [myFormGroup]="form" [isRequired]="true"
+                [minDate]="minDate" [maxDate]="maxDate" [myFormControlName]="'date'" [htmlElementId]="'valid_date'"
+                [formSubmitted]="formSubmitted">
+            </my-form-field>
+
+            <my-form-field [type]="'select'" [title]="'Status'" [items]="statusOptions" [myFormGroup]="form"
+                [isRequired]="true" [myFormControlName]="'status'" [htmlElementId]="'status'"
+                [formSubmitted]="formSubmitted">
+            </my-form-field>
+
+            <my-form-field [type]="'text'" [title]="'Source of fund'" [myFormGroup]="form" [isRequired]="false"
+                [placeholder]="'write something ...'" [myFormControlName]="'sourceOfFund'"
+                [htmlElementId]="'source_of_fund'" [formSubmitted]="formSubmitted"
+                [customPatternErrorMessage]="'Use letters only!'">
+            </my-form-field>
+
+
+            <div class="grid grid-nogutter buttons-container" *ngIf="!viewMode">
+                <p-button label="Back" (onClick)="prevPage()" icon="pi pi-angle-left"></p-button>
+                <p-button label="Next" icon="pi pi-angle-right" iconPos="right" [style]="{float:'right'}"
+                    [type]="'submit'">
+                </p-button>
+            </div>
+        </form>
+
+        <div *ngIf="viewMode" class="view-mode-data">
+            <table class="view-mode-table">
+                <tr>
+                    <th>Amount:</th>
+                    <td>{{this.form.value?.amount}}tt</td>
+                </tr>
+                <tr>
+                    <th>Date:</th>
+                    <td>{{this.form.value?.date}}ggg</td>
+                </tr>
+                <tr>
+                    <th>Status:</th>
+                    <td>{{this.form.value?.status}}fff</td>
+                </tr>
+                <tr>
+                    <th>Source of fund:</th>
+                    <td>{{this.form.value?.sourceOfFund}}dsfdf</td>
+                </tr>
+            </table>
+            <!-- <div>Amount: {{this.form.value?.amount}}</div>
+            <div>Date: {{this.form.value?.date}}</div>
+            <div>Status: {{this.form.value?.status}}</div>
+            <div>Source of fund: {{this.form.value?.sourceOfFund}}</div> -->
+        </div>
+    </ng-template>
+</p-card>
+
+
+
+<p-toast position="bottom-right">
+</p-toast>
