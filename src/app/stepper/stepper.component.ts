@@ -24,7 +24,7 @@ export class StepperComponent implements OnInit {
       },
       {
         label: "Select from list",
-        routerLink: "list"
+        routerLink: "person-list"
       }, {
         label: "Summary",
         routerLink: "summary"
